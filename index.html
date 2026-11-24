@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OVERTIME NYC | Luxury Timepieces &amp; Horological Services — New York</title>
+  <meta name="description" content="Discover exceptional luxury timepieces, buying, selling, trading, professional watch repair, refinishing, and in-person authentication at Overtime NYC, 64 West 47th Street, Booth F11, New York." />
+
+  <!-- Google Fonts: Cormorant Garamond (Editorial Serif) & Plus Jakarta Sans (Modern Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Smooth Scrollbar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/8.8.4/smooth-scrollbar.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            pure: '#FFFFFF',
+            ivory: '#F7F7F5',
+            platinum: '#E8E6E1',
+            gold: '#B69A67',
+            'gold-dark': '#9E8250',
+            charcoal: '#292929',
+            muted: '#777777',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          letterSpacing: {
+            'editorial': '0.18em',
+            'widest-luxury': '0.26em',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --bg-pure: #FFFFFF;
+      --bg-ivory: #F7F7F5;
+      --border-platinum: #E8E6E1;
+      --accent-gold: #B69A67;
+      --text-charcoal: #292929;
+      --text-muted: #777777;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-pure);
+      color: var(--text-charcoal);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Smooth Scrollbar Viewport Container */
+    #smooth-wrapper {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    #smooth-wrapper.scroll-locked {
+      pointer-events: none;
+    }
+
+    /* Custom Smooth Scrollbar Styling (Platinum Gray & Champagne Gold) */
+    .scrollbar-track {
+      background: rgba(232, 230, 225, 0.45) !important;
+      width: 6px !important;
+      z-index: 45 !important;
+      transition: opacity 0.3s ease, background-color 0.3s ease !important;
+    }
+
+    .scrollbar-track-y {
+      top: 0 !important;
+      right: 0 !important;
+      width: 6px !important;
+    }
+
+    .scrollbar-track-x {
+      display: none !important;
+    }
+
+    .scrollbar-thumb {
+      background: #B69A67 !important;
+      border-radius: 1px !important;
+      width: 6px !important;
+      transition: background-color 0.25s ease !important;
+    }
+
+    .scrollbar-thumb:hover,
+    .scrollbar-track:hover .scrollbar-thumb {
+      background: #9E8250 !important;
+    }
+
+    /* Editorial Link Underline Animation */
+    .nav-link {
+      position: relative;
+      padding-bottom: 4px;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 1px;
+      background-color: #B69A67;
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Subtle Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Watch Card Image Zoom */
+    .watch-card-img {
+      transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .watch-card:hover .watch-card-img {
+      transform: scale(1.045);
+    }
+
+    /* Hero Canvas Positioning */
+    #hero-three-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      transition: opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-pure text-charcoal selection:bg-gold selection:text-white">
+
+  <!-- ==================== A. FIXED STICKY HEADER (OUTSIDE SMOOTH-WRAPPER) ==================== -->
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-pure/95 backdrop-blur-md border-b border-platinum transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+      <div id="header-inner" class="flex items-center justify-between h-20 lg:h-24 transition-all duration-300">
+        
+        <!-- Logo -->
+        <a href="#home" data-scroll-target="#home" class="smooth-anchor group flex flex-col items-start focus:outline-none" aria-label="Overtime NYC Home">
+          <span class="font-serif text-2xl sm:text-[26px] font-semibold tracking-[0.22em] text-charcoal leading-none">
+            OVERTIME NYC
+          </span>
+          <span class="text-[9px] uppercase tracking-[0.34em] text-muted mt-1.5 group-hover:text-gold transition-colors">
+            47th Street · New York
+          </span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center space-x-8 xl:space-x-10" aria-label="Primary Navigation">
+          <a href="#home" data-scroll-target="#home" class="smooth-anchor nav-link text-[11px] uppercase tracking-editorial font-medium text-charcoal hover:text-gold transition-colors">Home</a>
+          <a href="#collection" data-scroll-target="#collection" class="smooth-anchor nav-link text-[11px] uppercase tracking-editorial font-medium text-charcoal hover:text-gold transition-colors">Collection</a>
+          <a href="#buy-sell-trade" data-scroll-target="#buy-sell-trade" class="smooth-anchor nav-link text-[11px] uppercase tracking-editorial font-medium text-charcoal hover:text-gold transition-colors">Buy / Sell / Trade</a>
+          <a href="#services" data-scroll-target="#services" class="smooth-anchor nav-link text-[11px] uppercase tracking-editorial font-medium text-charcoal hover:text-gold transition-colors">Services</a>
+          <a href="#about" data-scroll-target="#about" class="smooth-anchor nav-link text-[11px] uppercase tracking-editorial font-medium text-charcoal hover:text-gold transition-colors">About</a>
+          <a href="#contact" data-scroll-target="#contact" class="smooth-anchor nav-link text-[11px] uppercase tracking-editorial font-medium text-charcoal hover:text-gold transition-colors">Contact</a>
+        </nav>
+
+        <!-- Primary CTA + Mobile Toggle -->
+        <div class="flex items-center space-x-4">
+          <a href="#collection" data-scroll-target="#collection" class="smooth-anchor hidden sm:inline-flex items-center justify-center px-6 py-3 bg-gold hover:bg-charcoal text-white text-[11px] font-medium uppercase tracking-editorial transition-colors duration-300 rounded-[1px]">
+            Explore Collection
+          </a>
+
+          <!-- Mobile Hamburger Button -->
+          <button
+            id="mobile-menu-btn"
+            type="button"
+            class="lg:hidden p-2.5 text-charcoal hover:text-gold border border-platinum focus:outline-none transition-colors"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu-drawer"
+          >
+            <i data-lucide="menu" class="w-5 h-5" id="menu-icon-open"></i>
+            <i data-lucide="x" class="w-5 h-5 hidden" id="menu-icon-close"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div
+      id="mobile-menu-drawer"
+      class="lg:hidden overflow-hidden max-h-0 opacity-0 bg-pure border-b border-platinum transition-all duration-500 ease-in-out"
+      aria-hidden="true"
+    >
+      <div class="px-6 py-8 space-y-5 flex flex-col">
+        <a href="#home" data-scroll-target="#home" class="smooth-anchor mobile-nav-link text-xs uppercase tracking-editorial font-medium text-charcoal hover:text-gold py-2 border-b border-platinum/60">Home</a>
+        <a href="#collection" data-scroll-target="#collection" class="smooth-anchor mobile-nav-link text-xs uppercase tracking-editorial font-medium text-charcoal hover:text-gold py-2 border-b border-platinum/60">Collection</a>
+        <a href="#buy-sell-trade" data-scroll-target="#buy-sell-trade" class="smooth-anchor mobile-nav-link text-xs uppercase tracking-editorial font-medium text-charcoal hover:text-gold py-2 border-b border-platinum/60">Buy / Sell / Trade</a>
+        <a href="#services" data-scroll-target="#services" class="smooth-anchor mobile-nav-link text-xs uppercase tracking-editorial font-medium text-charcoal hover:text-gold py-2 border-b border-platinum/60">Services</a>
+        <a href="#about" data-scroll-target="#about" class="smooth-anchor mobile-nav-link text-xs uppercase tracking-editorial font-medium text-charcoal hover:text-gold py-2 border-b border-platinum/60">About</a>
+        <a href="#contact" data-scroll-target="#contact" class="smooth-anchor mobile-nav-link text-xs uppercase tracking-editorial font-medium text-charcoal hover:text-gold py-2 border-b border-platinum/60">Contact</a>
+        <div class="pt-3 flex flex-col sm:flex-row gap-3">
+          <a href="#collection" data-scroll-target="#collection" class="smooth-anchor mobile-nav-link w-full text-center px-6 py-3.5 bg-gold text-white text-[11px] font-medium uppercase tracking-editorial">
+            Explore Collection
+          </a>
+          <a href="https://calendly.com/ontimelux18/visit" target="_blank" rel="noopener noreferrer" class="w-full text-center px-6 py-3.5 border border-charcoal text-charcoal text-[11px] font-medium uppercase tracking-editorial">
+            Book Appointment
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== SMOOTH SCROLLBAR VIEWPORT WRAPPER ==================== -->
+  <div id="smooth-wrapper">
+    <div id="smooth-content" class="pt-20 lg:pt-24">
+      <main>
+        <!-- ==================== B. CINEMATIC HERO SECTION ==================== -->
+        <section id="home" class="relative min-h-[88vh] lg:min-h-[92vh] flex items-center bg-[#141413] overflow-hidden">
+          <!-- High-Resolution Luxury Watch Background Photograph (Parallax Target) -->
+          <img
+            id="hero-parallax-img"
+            src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=2200&q=85"
+            alt="Luxury mechanical timepiece macro photography"
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-55 scale-110 will-change-transform"
+          />
+          <!-- Refined Architectural Vignette Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-r from-[#111110]/90 via-[#111110]/65 to-[#111110]/35 z-[1]"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#111110]/70 via-transparent to-[#111110]/30 z-[1]"></div>
+
+          <!-- Three.js Ambient Horological Escapement / Orbital Ring Accent -->
+          <canvas id="hero-three-canvas" aria-hidden="true"></canvas>
+
+          <!-- Hero Content -->
+          <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-24 lg:py-32 w-full">
+            <div class="max-w-3xl">
+              <div class="inline-flex items-center space-x-3 mb-6">
+                <span class="w-8 h-[1px] bg-gold"></span>
+                <span class="text-[11px] uppercase tracking-widest-luxury text-gold font-medium">
+                  64 West 47th Street · Booth F11 · New York
+                </span>
+              </div>
+
+              <h1 class="font-serif text-4xl sm:text-6xl lg:text-[68px] font-normal text-white leading-[1.08] tracking-[0.06em] uppercase">
+                TIMELESS LUXURY.<br />
+                <span class="text-white/95">UNMATCHED CRAFT.</span>
+              </h1>
+
+              <p class="mt-7 text-base sm:text-lg text-white/80 font-light leading-relaxed max-w-xl">
+                Discover exceptional timepieces, expert craftsmanship, and personalized luxury watch services at Overtime NYC.
+              </p>
+
+              <div class="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                <a
+                  href="#collection"
+                  data-scroll-target="#collection"
+                  class="smooth-anchor inline-flex items-center justify-center px-8 py-4 bg-gold hover:bg-white text-white hover:text-charcoal text-[11px] font-medium uppercase tracking-editorial transition-all duration-300 rounded-[1px]"
+                >
+                  Explore Collection
+                </a>
+                <a
+                  href="#services"
+                  data-scroll-target="#services"
+                  class="smooth-anchor inline-flex items-center justify-center px-8 py-4 border border-white/50 hover:border-gold bg-transparent hover:bg-gold/10 text-white text-[11px] font-medium uppercase tracking-editorial transition-all duration-300 rounded-[1px]"
+                >
+                  Discover Our Services
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Subtle Scroll Cue -->
+          <a
+            href="#collection"
+            data-scroll-target="#collection"
+            aria-label="Scroll to Exceptional Timepieces"
+            class="smooth-anchor hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex-col items-center text-white/60 hover:text-gold transition-colors"
+          >
+            <span class="text-[9px] uppercase tracking-widest-luxury mb-2">Scroll</span>
+            <div class="w-[1px] h-8 bg-gradient-to-b from-gold to-transparent"></div>
+          </a>
+        </section>
+
+        <!-- ==================== C. FEATURED WATCH COLLECTION ==================== -->
+        <section id="collection" class="py-24 lg:py-32 bg-pure border-b border-platinum">
+          <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-platinum reveal">
+              <div>
+                <p class="text-[11px] uppercase tracking-widest-luxury text-gold font-medium mb-3">
+                  Curated Showcase
+                </p>
+                <h2 class="font-serif text-3xl sm:text-5xl font-normal text-charcoal tracking-[0.06em] uppercase">
+                  Exceptional Timepieces
+                </h2>
+                <p class="mt-3 text-muted text-sm sm:text-base font-light max-w-xl">
+                  Explore a curated selection of extraordinary watches.
+                </p>
+              </div>
+
+              <!-- Brand Filter Pills -->
+              <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filter showcase watches by brand">
+                <button type="button" data-filter="ALL" class="filter-btn active px-4 py-2 text-[10px] uppercase tracking-editorial border border-charcoal bg-charcoal text-white transition-colors">
+                  All Models
+                </button>
+                <button type="button" data-filter="ROLEX" class="filter-btn px-4 py-2 text-[10px] uppercase tracking-editorial border border-platinum text-charcoal hover:border-gold transition-colors">
+                  Rolex
+                </button>
+                <button type="button" data-filter="AUDEMARS PIGUET" class="filter-btn px-4 py-2 text-[10px] uppercase tracking-editorial border border-platinum text-charcoal hover:border-gold transition-colors">
+                  Audemars Piguet
+                </button>
+                <button type="button" data-filter="PATEK PHILIPPE" class="filter-btn px-4 py-2 text-[10px] uppercase tracking-editorial border border-platinum text-charcoal hover:border-gold transition-colors">
+                  Patek Philippe
+                </button>
+                <button type="button" data-filter="OMEGA & CARTIER" class="filter-btn px-4 py-2 text-[10px] uppercase tracking-editorial border border-platinum text-charcoal hover:border-gold transition-colors">
+                  Omega &amp; Cartier
+                </button>
+              </div>
+            </div>
+
+            <!-- Transparent Demonstration Notice (Explicitly Separating Demonstration Showcase from Live Inventory) -->
+            <div class="mt-8 mb-12 px-5 py-4 bg-ivory border border-platinum flex flex-col sm:flex-row sm:items-center justify-between gap-3 reveal">
+              <div class="flex items-start sm:items-center gap-3">
+                <i data-lucide="info" class="w-4 h-4 text-gold shrink-0 mt-0.5 sm:mt-0"></i>
+                <p class="text-xs text-muted leading-relaxed">
+                  <span class="font-medium text-charcoal uppercase tracking-wider">Showcase Reference Catalogue:</span>
+                  The timepieces displayed below represent illustrative horological references for visual presentation. Live showroom inventory and current sourcing availability are confirmed directly upon inquiry or via <a href="https://www.instagram.com/overtimenyc/" target="_blank" rel="noopener noreferrer" class="underline text-charcoal hover:text-gold">@overtimenyc</a>.
+                </p>
+              </div>
+              <a href="#contact" data-scroll-target="#contact" class="smooth-anchor text-[10px] uppercase tracking-editorial text-gold hover:text-charcoal font-medium whitespace-nowrap">
+                Request Sourcing &rarr;
+              </a>
+            </div>
+
+            <!-- Watch Grid -->
+            <div id="watch-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+              <!-- Populated cleanly via JS from structured catalog data -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== D. BUY, SELL & TRADE ==================== -->
+        <section id="buy-sell-trade" class="py-24 lg:py-32 bg-ivory border-b border-platinum">
+          <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+              <p class="text-[11px] uppercase tracking-widest-luxury text-gold font-medium mb-3">
+                Private Client Services
+              </p>
+              <h2 class="font-serif text-3xl sm:text-5xl font-normal text-charcoal tracking-[0.06em] uppercase leading-tight">
+                Your Watch Journey Starts Here.
+              </h2>
+              <div class="w-12 h-[1px] bg-gold mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              
+              <!-- Card 1: BUY A WATCH -->
+              <article class="bg-pure border border-platinum p-10 lg:p-12 flex flex-col justify-between hover:border-gold transition-colors duration-300 reveal">
+                <div>
+                  <div class="flex items-center justify-between mb-8">
+                    <span class="font-serif text-2xl text-gold">01</span>
+                    <div class="w-11 h-11 border border-platinum flex items-center justify-center text-charcoal">
+                      <i data-lucide="watch" class="w-5 h-5 stroke-[1.4]"></i>
+                    </div>
+                  </div>
+                  <h3 class="font-serif text-2xl sm:text-[28px] text-charcoal tracking-[0.06em] uppercase mb-4">
+                    Buy A Watch
+                  </h3>
+                  <p class="text-muted text-sm leading-relaxed mb-8">
+                    Discover exceptional timepieces and find your next watch. Connect with our New York showroom to inquire about sought-after references or request bespoke timepiece sourcing tailored to your collection.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onclick="routeToInquiry('Buying a Watch', '', 'I would like to inquire about purchasing or sourcing a luxury timepiece.')"
+                  class="w-full py-4 px-6 bg-charcoal hover:bg-gold text-white text-[11px] uppercase tracking-editorial font-medium transition-colors duration-300 text-center"
+                >
+                  Inquire To Buy
+                </button>
+              </article>
+
+              <!-- Card 2: SELL YOUR WATCH -->
+              <article class="bg-pure border border-platinum p-10 lg:p-12 flex flex-col justify-between hover:border-gold transition-colors duration-300 reveal">
+                <div>
+                  <div class="flex items-center justify-between mb-8">
+                    <span class="font-serif text-2xl text-gold">02</span>
+                    <div class="w-11 h-11 border border-platinum flex items-center justify-center text-charcoal">
+                      <i data-lucide="badge-dollar-sign" class="w-5 h-5 stroke-[1.4]"></i>
+                    </div>
+                  </div>
+                  <h3 class="font-serif text-2xl sm:text-[28px] text-charcoal tracking-[0.06em] uppercase mb-4">
+                    Sell Your Watch
+                  </h3>
+                  <p class="text-muted text-sm leading-relaxed mb-8">
+                    Connect with our team to discuss selling your timepiece. We offer transparent, straightforward evaluations in person at our 47th Street showroom or through a private consultation.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onclick="routeToInquiry('Selling a Watch', '', 'I would like to connect with Overtime NYC regarding selling my timepiece.')"
+                  class="w-full py-4 px-6 border border-charcoal hover:bg-charcoal text-charcoal hover:text-white text-[11px] uppercase tracking-editorial font-medium transition-colors duration-300 text-center"
+                >
+                  Discuss Selling
+                </button>
+              </article>
+
+              <!-- Card 3: TRADE YOUR WATCH -->
+              <article class="bg-pure border border-platinum p-10 lg:p-12 flex flex-col justify-between hover:border-gold transition-colors duration-300 reveal">
+                <div>
+                  <div class="flex items-center justify-between mb-8">
+                    <span class="font-serif text-2xl text-gold">03</span>
+                    <div class="w-11 h-11 border border-platinum flex items-center justify-center text-charcoal">
+                      <i data-lucide="repeat" class="w-5 h-5 stroke-[1.4]"></i>
+                    </div>
+                  </div>
+                  <h3 class="font-serif text-2xl sm:text-[28px] text-charcoal tracking-[0.06em] uppercase mb-4">
+                    Trade Your Watch
+                  </h3>
+                  <p class="text-muted text-sm leading-relaxed mb-8">
+                    Explore opportunities to trade your current watch. Upgrade or transition your collection seamlessly by applying the value of your existing timepiece toward your next acquisition.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onclick="routeToInquiry('Trading a Watch', '', 'I am interested in exploring trade options for my current timepiece.')"
+                  class="w-full py-4 px-6 border border-charcoal hover:bg-charcoal text-charcoal hover:text-white text-[11px] uppercase tracking-editorial font-medium transition-colors duration-300 text-center"
+                >
+                  Explore A Trade
+                </button>
+              </article>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== E. WATCH SERVICES ==================== -->
+        <section id="services" class="py-24 lg:py-32 bg-pure border-b border-platinum">
+          <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 reveal">
+              <div>
+                <p class="text-[11px] uppercase tracking-widest-luxury text-gold font-medium mb-3">
+                  Horological Care
+                </p>
+                <h2 class="font-serif text-3xl sm:text-5xl font-normal text-charcoal tracking-[0.06em] uppercase">
+                  Precision In Every Detail.
+                </h2>
+              </div>
+              <p class="text-muted text-sm max-w-md leading-relaxed">
+                Dedicated technical care, aesthetic restoration, and thorough in-person inspection performed with respect for mechanical horology.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
+              
+              <!-- Service 1: Watch Repair -->
+              <div class="group border border-platinum bg-pure flex flex-col justify-between reveal">
+                <div>
+                  <div class="aspect-[4/3] overflow-hidden bg-ivory border-b border-platinum">
+                    <img
+                      src="https://images.unsplash.com/photo-1585123334904-845d60e97b29?auto=format&fit=crop&w=1000&q=80"
+                      alt="Professional luxury watch movement repair and servicing"
+                      loading="lazy"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  <div class="p-8 lg:p-9">
+                    <span class="text-[10px] uppercase tracking-widest-luxury text-gold font-medium">Service I</span>
+                    <h3 class="font-serif text-2xl sm:text-3xl text-charcoal tracking-[0.04em] uppercase mt-2 mb-4">
+                      Watch Repair
+                    </h3>
+                    <p class="text-muted text-sm leading-relaxed">
+                      Comprehensive mechanical diagnostics, movement servicing, timing regulation, and component care designed to keep your luxury timepiece performing reliably.
+                    </p>
+                  </div>
+                </div>
+                <div class="px-8 lg:px-9 pb-8">
+                  <button
+                    type="button"
+                    onclick="routeToInquiry('Watch Repair', '', 'I would like to schedule a watch repair assessment.')"
+                    class="inline-flex items-center gap-2 text-[11px] uppercase tracking-editorial text-charcoal hover:text-gold font-medium transition-colors"
+                  >
+                    <span>Inquire About Repair</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Service 2: Watch Refinishing -->
+              <div class="group border border-platinum bg-pure flex flex-col justify-between reveal">
+                <div>
+                  <div class="aspect-[4/3] overflow-hidden bg-ivory border-b border-platinum">
+                    <img
+                      src="https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?auto=format&fit=crop&w=1000&q=80"
+                      alt="Precision watch case and bracelet refinishing"
+                      loading="lazy"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  <div class="p-8 lg:p-9">
+                    <span class="text-[10px] uppercase tracking-widest-luxury text-gold font-medium">Service II</span>
+                    <h3 class="font-serif text-2xl sm:text-3xl text-charcoal tracking-[0.04em] uppercase mt-2 mb-4">
+                      Watch Refinishing
+                    </h3>
+                    <p class="text-muted text-sm leading-relaxed">
+                      Careful exterior case and bracelet refinishing that respects original factory bevels, brushed grain textures, and mirror-polished surfaces.
+                    </p>
+                  </div>
+                </div>
+                <div class="px-8 lg:px-9 pb-8">
+                  <button
+                    type="button"
+                    onclick="routeToInquiry('Watch Repair', '', 'I would like to inquire about professional watch refinishing.')"
+                    class="inline-flex items-center gap-2 text-[11px] uppercase tracking-editorial text-charcoal hover:text-gold font-medium transition-colors"
+                  >
+                    <span>Inquire About Refinishing</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Service 3: Watch Authentication -->
+              <div class="group border border-platinum bg-pure flex flex-col justify-between reveal">
+                <div>
+                  <div class="aspect-[4/3] overflow-hidden bg-ivory border-b border-platinum">
+                    <img
+                      src="https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?auto=format&fit=crop&w=1000&q=80"
+                      alt="In-person luxury watch authentication and inspection"
+                      loading="lazy"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  <div class="p-8 lg:p-9">
+                    <span class="text-[10px] uppercase tracking-widest-luxury text-gold font-medium">Service III</span>
+                    <h3 class="font-serif text-2xl sm:text-3xl text-charcoal tracking-[0.04em] uppercase mt-2 mb-4">
+                      Watch Authentication
+                    </h3>
+                    <p class="text-muted text-sm leading-relaxed">
+                      Detailed in-person physical and mechanical verification of case architecture, dial details, serial engravings, and internal caliber components at our New York showroom.
+                    </p>
+                  </div>
+                </div>
+                <div class="px-8 lg:px-9 pb-8">
+                  <button
+                    type="button"
+                    onclick="routeToInquiry('Authentication', '', 'I would like to book an in-person watch authentication appointment.')"
+                    class="inline-flex items-center gap-2 text-[11px] uppercase tracking-editorial text-charcoal hover:text-gold font-medium transition-colors"
+                  >
+                    <span>Request Authentication</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Section Primary CTA -->
+            <div class="mt-14 text-center reveal">
+              <a
+                href="#contact"
+                data-scroll-target="#contact"
+                class="smooth-anchor inline-flex items-center justify-center px-10 py-4 bg-gold hover:bg-charcoal text-white text-[11px] font-medium uppercase tracking-editorial transition-colors duration-300"
+              >
+                Explore Our Services
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== F. BRAND STORY ==================== -->
+        <section id="about" class="py-24 lg:py-32 bg-ivory border-b border-platinum">
+          <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+              
+              <!-- Editorial Image -->
+              <div class="lg:col-span-6 reveal">
+                <div class="relative border border-platinum bg-pure p-3 sm:p-4">
+                  <div class="aspect-[4/5] overflow-hidden">
+                    <img
+                      src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=1200&q=85"
+                      alt="Fine luxury mechanical watch craftsmanship"
+                      loading="lazy"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div class="pt-4 pb-1 px-2 flex items-center justify-between text-[10px] uppercase tracking-editorial text-muted">
+                    <span>Overtime NYC</span>
+                    <span>47th Street · New York</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Editorial Narrative -->
+              <div class="lg:col-span-6 reveal">
+                <p class="text-[11px] uppercase tracking-widest-luxury text-gold font-medium mb-4">
+                  Our Philosophy
+                </p>
+                <h2 class="font-serif text-3xl sm:text-5xl font-normal text-charcoal tracking-[0.05em] uppercase leading-[1.15]">
+                  More Than A Watch.<br />It's A Legacy.
+                </h2>
+
+                <div class="w-14 h-[1px] bg-gold my-8"></div>
+
+                <div class="space-y-5 text-muted text-sm sm:text-base font-light leading-relaxed">
+                  <p>
+                    At Overtime NYC, fine watchmaking is approached with genuine passion, discretion, and respect for every mechanical detail. Located in the heart of New York City's historic 47th Street district, our showroom serves collectors, enthusiasts, and first-time buyers seeking an elevated, personal experience.
+                  </p>
+                  <p>
+                    Whether acquiring a milestone reference, exploring a trade, or entrusting a prized timepiece for professional repair, refinishing, or in-person authentication, every client receives dedicated, one-on-one attention tailored to their goals.
+                  </p>
+                  <p class="text-charcoal font-normal">
+                    We believe the experience of acquiring and caring for a luxury watch should be as enduring as the timepiece itself.
+                  </p>
+                </div>
+
+                <div class="mt-10 pt-8 border-t border-platinum grid grid-cols-2 gap-6">
+                  <div>
+                    <p class="text-[10px] uppercase tracking-editorial text-muted mb-1">Showroom Location</p>
+                    <p class="font-serif text-lg text-charcoal">64 West 47th Street, Booth F11</p>
+                  </div>
+                  <div>
+                    <p class="text-[10px] uppercase tracking-editorial text-muted mb-1">Client Experience</p>
+                    <p class="font-serif text-lg text-charcoal">Private Consultations &amp; Care</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== G. WHY CHOOSE OVERTIME NYC ==================== -->
+        <section class="py-20 lg:py-28 bg-pure border-b border-platinum">
+          <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+              <p class="text-[11px] uppercase tracking-widest-luxury text-gold font-medium mb-3">
+                The Overtime Standard
+              </p>
+              <h2 class="font-serif text-3xl sm:text-4xl font-normal text-charcoal tracking-[0.06em] uppercase">
+                Why Choose Overtime NYC
+              </h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 border-t border-l border-platinum reveal">
+              
+              <!-- Pillar 1 -->
+              <div class="p-8 border-r border-b border-platinum bg-pure hover:bg-ivory/60 transition-colors">
+                <i data-lucide="user-check" class="w-6 h-6 text-gold stroke-[1.3] mb-6"></i>
+                <h3 class="font-serif text-xl text-charcoal uppercase tracking-wide mb-2.5">
+                  Personalized Service
+                </h3>
+                <p class="text-xs text-muted leading-relaxed">
+                  Dedicated one-on-one guidance tailored to your collecting preferences and timeline.
+                </p>
+              </div>
+
+              <!-- Pillar 2 -->
+              <div class="p-8 border-r border-b border-platinum bg-pure hover:bg-ivory/60 transition-colors">
+                <i data-lucide="compass" class="w-6 h-6 text-gold stroke-[1.3] mb-6"></i>
+                <h3 class="font-serif text-xl text-charcoal uppercase tracking-wide mb-2.5">
+                  Luxury Watch Expertise
+                </h3>
+                <p class="text-xs text-muted leading-relaxed">
+                  Focused market knowledge across premier Swiss and haute horlogerie references.
+                </p>
+              </div>
+
+              <!-- Pillar 3 -->
+              <div class="p-8 border-r border-b border-platinum bg-pure hover:bg-ivory/60 transition-colors">
+                <i data-lucide="shield-check" class="w-6 h-6 text-gold stroke-[1.3] mb-6"></i>
+                <h3 class="font-serif text-xl text-charcoal uppercase tracking-wide mb-2.5">
+                  In-Person Authentication
+                </h3>
+                <p class="text-xs text-muted leading-relaxed">
+                  Hands-on physical and mechanical inspection conducted directly at our New York location.
+                </p>
+              </div>
+
+              <!-- Pillar 4 -->
+              <div class="p-8 border-r border-b border-platinum bg-pure hover:bg-ivory/60 transition-colors">
+                <i data-lucide="settings" class="w-6 h-6 text-gold stroke-[1.3] mb-6"></i>
+                <h3 class="font-serif text-xl text-charcoal uppercase tracking-wide mb-2.5">
+                  Professional Watch Services
+                </h3>
+                <p class="text-xs text-muted leading-relaxed">
+                  Full-spectrum watch repair, movement care, and precision exterior refinishing.
+                </p>
+              </div>
+
+              <!-- Pillar 5 -->
+              <div class="p-8 border-r border-b border-platinum bg-pure hover:bg-ivory/60 transition-colors sm:col-span-2 lg:col-span-1">
+                <i data-lucide="map-pin" class="w-6 h-6 text-gold stroke-[1.3] mb-6"></i>
+                <h3 class="font-serif text-xl text-charcoal uppercase tracking-wide mb-2.5">
+                  Convenient New York Location
+                </h3>
+                <p class="text-xs text-muted leading-relaxed">
+                  Centrally situated at 64 West 47th Street, Booth F11 in Midtown Manhattan.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== H. CUSTOMER INQUIRY SECTION ==================== -->
+        <section id="contact" class="py-24 lg:py-32 bg-ivory border-b border-platinum">
+          <div class="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12">
+            
+            <div class="text-center mb-14 reveal">
+              <p class="text-[11px] uppercase tracking-widest-luxury text-gold font-medium mb-3">
+                Concierge Desk
+              </p>
+              <h2 class="font-serif text-3xl sm:text-5xl font-normal text-charcoal tracking-[0.06em] uppercase">
+                Find Your Next Timepiece.
+              </h2>
+              <p class="mt-4 text-muted text-sm sm:text-base font-light max-w-xl mx-auto">
+                Submit an inquiry to discuss acquiring, selling, trading, or servicing a luxury watch with the Overtime NYC team.
+              </p>
+            </div>
+
+            <div class="bg-pure border border-platinum p-7 sm:p-12 lg:p-14 reveal">
+              <!-- Validation / Submission Feedback Banner -->
+              <div id="form-feedback" class="hidden mb-8 p-5 border text-sm" role="alert"></div>
+
+              <form id="luxury-inquiry-form" novalidate class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <!-- Full Name -->
+                  <div>
+                    <label for="fullName" class="block text-[10px] uppercase tracking-editorial text-charcoal font-medium mb-2">
+                      Full Name <span class="text-gold">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      required
+                      placeholder="Alexander Sterling"
+                      class="w-full px-4 py-3.5 bg-pure border border-platinum focus:border-gold focus:outline-none text-sm text-charcoal placeholder:text-muted/50 transition-colors"
+                    />
+                    <p id="error-fullName" class="hidden mt-1.5 text-xs text-red-700"></p>
+                  </div>
+
+                  <!-- Email Address -->
+                  <div>
+                    <label for="emailAddress" class="block text-[10px] uppercase tracking-editorial text-charcoal font-medium mb-2">
+                      Email Address <span class="text-gold">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="emailAddress"
+                      name="emailAddress"
+                      required
+                      placeholder="client@domain.com"
+                      class="w-full px-4 py-3.5 bg-pure border border-platinum focus:border-gold focus:outline-none text-sm text-charcoal placeholder:text-muted/50 transition-colors"
+                    />
+                    <p id="error-emailAddress" class="hidden mt-1.5 text-xs text-red-700"></p>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                  <!-- Phone Number -->
+                  <div>
+                    <label for="phoneNumber" class="block text-[10px] uppercase tracking-editorial text-charcoal font-medium mb-2">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      placeholder="+1 (212) 000-0000"
+                      class="w-full px-4 py-3.5 bg-pure border border-platinum focus:border-gold focus:outline-none text-sm text-charcoal placeholder:text-muted/50 transition-colors"
+                    />
+                  </div>
+
+                  <!-- Inquiry Type -->
+                  <div>
+                    <label for="inquiryType" class="block text-[10px] uppercase tracking-editorial text-charcoal font-medium mb-2">
+                      Inquiry Type <span class="text-gold">*</span>
+                    </label>
+                    <select
+                      id="inquiryType"
+                      name="inquiryType"
+                      required
+                      class="w-full px-4 py-3.5 bg-pure border border-platinum focus:border-gold focus:outline-none text-sm text-charcoal transition-colors"
+                    >
+                      <option value="Buying a Watch">Buying a Watch</option>
+                      <option value="Selling a Watch">Selling a Watch</option>
+                      <option value="Trading a Watch">Trading a Watch</option>
+                      <option value="Watch Repair">Watch Repair</option>
+                      <option value="Authentication">Authentication</option>
+                      <option value="General Inquiry">General Inquiry</option>
+                    </select>
+                  </div>
+
+                  <!-- Watch Brand -->
+                  <div>
+                    <label for="watchBrand" class="block text-[10px] uppercase tracking-editorial text-charcoal font-medium mb-2">
+                      Watch Brand / Reference
+                    </label>
+                    <input
+                      type="text"
+                      id="watchBrand"
+                      name="watchBrand"
+                      placeholder="e.g., Rolex, Patek Philippe..."
+                      class="w-full px-4 py-3.5 bg-pure border border-platinum focus:border-gold focus:outline-none text-sm text-charcoal placeholder:text-muted/50 transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <!-- Message -->
+                <div>
+                  <label for="message" class="block text-[10px] uppercase tracking-editorial text-charcoal font-medium mb-2">
+                    Message <span class="text-gold">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    required
+                    placeholder="Share details regarding the timepiece, reference number, or service you are interested in..."
+                    class="w-full px-4 py-3.5 bg-pure border border-platinum focus:border-gold focus:outline-none text-sm text-charcoal placeholder:text-muted/50 transition-colors resize-y"
+                  ></textarea>
+                  <p id="error-message" class="hidden mt-1.5 text-xs text-red-700"></p>
+                </div>
+
+                <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                  <button
+                    type="submit"
+                    class="px-10 py-4 bg-gold hover:bg-charcoal text-white text-[11px] font-medium uppercase tracking-editorial transition-colors duration-300"
+                  >
+                    Submit Private Inquiry
+                  </button>
+
+                  <a
+                    href="https://calendly.com/ontimelux18/visit"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center gap-2 text-[11px] uppercase tracking-editorial text-charcoal hover:text-gold font-medium py-2 transition-colors"
+                  >
+                    <span>Or Schedule Direct Visit</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== I. VISIT OUR STORE ==================== -->
+        <section id="visit" class="py-24 lg:py-32 bg-pure border-b border-platinum">
+          <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+              
+              <!-- Showroom Details -->
+              <div class="lg:col-span-5 flex flex-col justify-between reveal">
+                <div>
+                  <p class="text-[11px] uppercase tracking-widest-luxury text-gold font-medium mb-3">
+                    New York Showroom
+                  </p>
+                  <h2 class="font-serif text-3xl sm:text-5xl font-normal text-charcoal tracking-[0.06em] uppercase leading-tight">
+                    Experience Overtime NYC.
+                  </h2>
+
+                  <div class="w-12 h-[1px] bg-gold my-8"></div>
+
+                  <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                      <i data-lucide="map-pin" class="w-5 h-5 text-gold shrink-0 mt-1 stroke-[1.5]"></i>
+                      <div>
+                        <p class="text-[10px] uppercase tracking-editorial text-muted mb-1">Showroom Address</p>
+                        <p class="text-base text-charcoal font-normal leading-relaxed">
+                          64 West 47th Street, Booth F11,<br />
+                          New York, NY 10036, USA
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                      <i data-lucide="calendar" class="w-5 h-5 text-gold shrink-0 mt-1 stroke-[1.5]"></i>
+                      <div>
+                        <p class="text-[10px] uppercase tracking-editorial text-muted mb-1">Private Appointments</p>
+                        <p class="text-sm text-muted leading-relaxed">
+                          Schedule an in-person consultation for buying, selling, trading, or authentication at Booth F11.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                      <i data-lucide="instagram" class="w-5 h-5 text-gold shrink-0 mt-1 stroke-[1.5]"></i>
+                      <div>
+                        <p class="text-[10px] uppercase tracking-editorial text-muted mb-1">Direct Concierge</p>
+                        <p class="text-sm text-charcoal">
+                          Instagram: <a href="https://www.instagram.com/overtimenyc/" target="_blank" rel="noopener noreferrer" class="underline hover:text-gold transition-colors">@overtimenyc</a><br />
+                          <span class="text-muted text-xs">Telephone &amp; Direct Line: Available Upon Appointment</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-10 pt-8 border-t border-platinum flex flex-col sm:flex-row gap-4">
+                  <a
+                    href="https://calendly.com/ontimelux18/visit"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-charcoal hover:bg-gold text-white text-[11px] font-medium uppercase tracking-editorial transition-colors duration-300"
+                  >
+                    <span>Book Showroom Visit</span>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                  </a>
+                  <a
+                    href="https://maps.google.com/?q=64+West+47th+Street,+New+York,+NY+10036"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center px-6 py-4 border border-platinum hover:border-charcoal text-charcoal text-[11px] font-medium uppercase tracking-editorial transition-colors"
+                  >
+                    Open in Google Maps
+                  </a>
+                </div>
+              </div>
+
+              <!-- Architectural Maps Embed / Interactive Location Frame -->
+              <div class="lg:col-span-7 reveal">
+                <div class="h-full min-h-[380px] border border-platinum bg-ivory p-3 flex flex-col">
+                  <div class="relative flex-1 w-full overflow-hidden bg-[#EAE7E1]">
+                    <iframe
+                      title="Overtime NYC Location — 64 West 47th Street, New York, NY 10036"
+                      src="https://www.openstreetmap.org/export/embed.html?bbox=-73.9848%2C40.7556%2C-73.9776%2C40.7596&amp;layer=mapnik&amp;marker=40.7576%2C-73.9812"
+                      class="w-full h-full min-h-[340px] border-0 grayscale contrast-95 opacity-90"
+                      loading="lazy"
+                    ></iframe>
+                    <!-- Architectural Map Pin Overlay Card -->
+                    <div class="absolute bottom-4 left-4 right-4 sm:right-auto bg-pure/95 backdrop-blur-sm border border-platinum px-5 py-4 max-w-xs shadow-sm">
+                      <p class="text-[9px] uppercase tracking-widest-luxury text-gold font-medium">Midtown Manhattan</p>
+                      <p class="font-serif text-lg text-charcoal mt-0.5">OVERTIME NYC</p>
+                      <p class="text-xs text-muted mt-1">64 West 47th Street, Booth F11, NY 10036</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== J. INSTAGRAM SECTION ==================== -->
+        <section id="instagram" class="py-24 lg:py-32 bg-ivory border-b border-platinum">
+          <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 reveal">
+              <div>
+                <p class="text-[11px] uppercase tracking-widest-luxury text-gold font-medium mb-3">
+                  @overtimenyc · 11.6K Followers · 901 Posts
+                </p>
+                <h2 class="font-serif text-3xl sm:text-5xl font-normal text-charcoal tracking-[0.06em] uppercase">
+                  Follow The Overtime Experience.
+                </h2>
+                <p class="mt-3 text-xs sm:text-sm text-muted">
+                  Editorial visual preview — view our latest arrivals and daily updates directly on Instagram.
+                </p>
+              </div>
+
+              <a
+                href="https://www.instagram.com/overtimenyc/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 border border-charcoal hover:bg-charcoal text-charcoal hover:text-white text-[11px] font-medium uppercase tracking-editorial transition-colors duration-300 self-start md:self-auto"
+              >
+                <i data-lucide="instagram" class="w-4 h-4"></i>
+                <span>View @overtimenyc</span>
+              </a>
+            </div>
+
+            <!-- 4-Panel Editorial Visual Gallery -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 reveal">
+              <a href="https://www.instagram.com/overtimenyc/" target="_blank" rel="noopener noreferrer" class="group relative aspect-square overflow-hidden border border-platinum bg-pure block">
+                <img
+                  src="https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=800&q=80"
+                  alt="Overtime NYC Horology Editorial Visual 1"
+                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/45 transition-colors duration-300 flex items-center justify-center">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-[10px] uppercase tracking-editorial border border-white/70 px-4 py-2">
+                    Open Instagram
+                  </span>
+                </div>
+              </a>
+
+              <a href="https://www.instagram.com/overtimenyc/" target="_blank" rel="noopener noreferrer" class="group relative aspect-square overflow-hidden border border-platinum bg-pure block">
+                <img
+                  src="https://images.unsplash.com/photo-1548171915-e79a380a2a4b?auto=format&fit=crop&w=800&q=80"
+                  alt="Overtime NYC Horology Editorial Visual 2"
+                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/45 transition-colors duration-300 flex items-center justify-center">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-[10px] uppercase tracking-editorial border border-white/70 px-4 py-2">
+                    Open Instagram
+                  </span>
+                </div>
+              </a>
+
+              <a href="https://www.instagram.com/overtimenyc/" target="_blank" rel="noopener noreferrer" class="group relative aspect-square overflow-hidden border border-platinum bg-pure block">
+                <img
+                  src="https://images.unsplash.com/photo-1622434641406-a158123450f9?auto=format&fit=crop&w=800&q=80"
+                  alt="Overtime NYC Horology Editorial Visual 3"
+                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/45 transition-colors duration-300 flex items-center justify-center">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-[10px] uppercase tracking-editorial border border-white/70 px-4 py-2">
+                    Open Instagram
+                  </span>
+                </div>
+              </a>
+
+              <a href="https://www.instagram.com/overtimenyc/" target="_blank" rel="noopener noreferrer" class="group relative aspect-square overflow-hidden border border-platinum bg-pure block">
+                <img
+                  src="https://images.unsplash.com/photo-1633869699811-cd4f63049b36?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
+                  alt="Overtime NYC Horology Editorial Visual 4"
+                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/45 transition-colors duration-300 flex items-center justify-center">
+                  <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-[10px] uppercase tracking-editorial border border-white/70 px-4 py-2">
+                    Open Instagram
+                  </span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- ==================== K. FOOTER ==================== -->
+      <footer class="bg-charcoal text-white pt-20 pb-12">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/15">
+            
+            <!-- Brand Column -->
+            <div class="lg:col-span-4">
+              <a href="#home" data-scroll-target="#home" class="smooth-anchor inline-block">
+                <span class="font-serif text-2xl tracking-[0.24em] text-white uppercase">OVERTIME NYC</span>
+              </a>
+              <p class="mt-5 text-sm text-white/65 font-light leading-relaxed max-w-sm">
+                A dedicated New York destination for buying, selling, trading, and servicing exceptional luxury timepieces with personalized attention and precision.
+              </p>
+              <div class="mt-6 flex items-center space-x-4">
+                <a
+                  href="https://www.instagram.com/overtimenyc/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 text-xs uppercase tracking-editorial text-gold hover:text-white transition-colors"
+                >
+                  <i data-lucide="instagram" class="w-4 h-4"></i>
+                  <span>@overtimenyc</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="lg:col-span-2">
+              <h3 class="text-[10px] uppercase tracking-widest-luxury text-gold font-medium mb-5">
+                Navigation
+              </h3>
+              <ul class="space-y-3 text-xs text-white/75">
+                <li><a href="#home" data-scroll-target="#home" class="smooth-anchor hover:text-gold transition-colors">Home</a></li>
+                <li><a href="#collection" data-scroll-target="#collection" class="smooth-anchor hover:text-gold transition-colors">Collection</a></li>
+                <li><a href="#buy-sell-trade" data-scroll-target="#buy-sell-trade" class="smooth-anchor hover:text-gold transition-colors">Buy / Sell / Trade</a></li>
+                <li><a href="#services" data-scroll-target="#services" class="smooth-anchor hover:text-gold transition-colors">Services</a></li>
+                <li><a href="#about" data-scroll-target="#about" class="smooth-anchor hover:text-gold transition-colors">About</a></li>
+                <li><a href="#contact" data-scroll-target="#contact" class="smooth-anchor hover:text-gold transition-colors">Contact</a></li>
+              </ul>
+            </div>
+
+            <!-- Services Links -->
+            <div class="lg:col-span-3">
+              <h3 class="text-[10px] uppercase tracking-widest-luxury text-gold font-medium mb-5">
+                Services
+              </h3>
+              <ul class="space-y-3 text-xs text-white/75">
+                <li><a href="#buy-sell-trade" data-scroll-target="#buy-sell-trade" class="smooth-anchor hover:text-gold transition-colors">Luxury Watch Buying</a></li>
+                <li><a href="#buy-sell-trade" data-scroll-target="#buy-sell-trade" class="smooth-anchor hover:text-gold transition-colors">Luxury Watch Selling</a></li>
+                <li><a href="#buy-sell-trade" data-scroll-target="#buy-sell-trade" class="smooth-anchor hover:text-gold transition-colors">Watch Trading</a></li>
+                <li><a href="#services" data-scroll-target="#services" class="smooth-anchor hover:text-gold transition-colors">Professional Watch Repair</a></li>
+                <li><a href="#services" data-scroll-target="#services" class="smooth-anchor hover:text-gold transition-colors">Watch Refinishing</a></li>
+                <li><a href="#services" data-scroll-target="#services" class="smooth-anchor hover:text-gold transition-colors">In-Person Watch Authentication</a></li>
+              </ul>
+            </div>
+
+            <!-- Showroom & Booking -->
+            <div class="lg:col-span-3">
+              <h3 class="text-[10px] uppercase tracking-widest-luxury text-gold font-medium mb-5">
+                Showroom
+              </h3>
+              <p class="text-xs text-white/75 leading-relaxed mb-5">
+                64 West 47th Street, Booth F11,<br />
+                New York, NY 10036, USA
+              </p>
+              <a
+                href="https://calendly.com/ontimelux18/visit"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center px-6 py-3 border border-gold text-gold hover:bg-gold hover:text-white text-[10px] uppercase tracking-editorial transition-colors duration-300"
+              >
+                Book Appointment
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Bottom Copyright -->
+          <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-white/50">
+            <p>&copy; <span id="copyright-year"></span> Overtime NYC. All rights reserved.</p>
+            <p class="text-center sm:text-right">
+              Independent luxury watch specialist. Not affiliated with any watch brand shown.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ==================== FIXED BACK-TO-TOP CONTROL (OUTSIDE SMOOTH-WRAPPER) ==================== -->
+  <button
+    id="back-to-top-btn"
+    type="button"
+    aria-label="Return to top"
+    class="fixed bottom-6 right-6 z-40 w-11 h-11 bg-pure/95 backdrop-blur-sm border border-platinum hover:border-gold text-charcoal hover:text-gold flex items-center justify-center shadow-sm opacity-0 pointer-events-none translate-y-3 transition-all duration-300"
+  >
+    <i data-lucide="arrow-up" class="w-4 h-4"></i>
+  </button>
+
+  <!-- ==================== FIXED WATCH SPECIFICATION DETAIL MODAL (OUTSIDE SMOOTH-WRAPPER) ==================== -->
+  <div
+    id="watch-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-charcoal/75 backdrop-blur-sm modal-backdrop"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-watch-title"
+  >
+    <div class="bg-pure border border-platinum max-w-3xl w-full overflow-hidden shadow-2xl relative">
+      <button
+        type="button"
+        id="close-modal-btn"
+        class="absolute top-4 right-4 z-10 w-10 h-10 bg-pure/90 border border-platinum flex items-center justify-center text-charcoal hover:text-gold transition-colors"
+        aria-label="Close timepiece details"
+      >
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2">
+        <div class="aspect-square md:aspect-auto bg-ivory border-b md:border-b-0 md:border-r border-platinum overflow-hidden">
+          <img id="modal-watch-img" src="" alt="" class="w-full h-full object-cover" />
+        </div>
+
+        <div class="p-8 sm:p-10 flex flex-col justify-between">
+          <div>
+            <span id="modal-watch-brand" class="text-[10px] uppercase tracking-widest-luxury text-gold font-medium"></span>
+            <h3 id="modal-watch-title" class="font-serif text-3xl text-charcoal uppercase tracking-wide mt-1"></h3>
+            <p id="modal-watch-ref" class="text-xs text-muted uppercase tracking-editorial mt-1"></p>
+
+            <div class="my-6 py-4 border-y border-platinum space-y-3 text-xs">
+              <div class="flex justify-between">
+                <span class="text-muted uppercase tracking-wider">Case Architecture</span>
+                <span id="modal-watch-case" class="text-charcoal font-medium"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-muted uppercase tracking-wider">Caliber / Movement</span>
+                <span id="modal-watch-movement" class="text-charcoal font-medium"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-muted uppercase tracking-wider">Dial &amp; Crystal</span>
+                <span id="modal-watch-dial" class="text-charcoal font-medium"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-muted uppercase tracking-wider">Status</span>
+                <span class="text-gold font-medium">Showcase Reference</span>
+              </div>
+            </div>
+
+            <p id="modal-watch-desc" class="text-xs text-muted leading-relaxed"></p>
+          </div>
+
+          <div class="mt-8 space-y-3">
+            <button
+              type="button"
+              id="modal-request-price-btn"
+              class="w-full py-3.5 px-6 bg-gold hover:bg-charcoal text-white text-[11px] uppercase tracking-editorial font-medium transition-colors"
+            >
+              Request Price &amp; Sourcing
+            </button>
+            <a
+              href="https://calendly.com/ontimelux18/visit"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block w-full text-center py-3 px-6 border border-platinum hover:border-charcoal text-charcoal text-[10px] uppercase tracking-editorial transition-colors"
+            >
+              Book In-Person Viewing
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT APPLICATION LOGIC ==================== -->
+  <script>
+    // 1. Showcase Catalogue Data (Clearly labeled as Demonstration Showcase References)
+    const WATCH_SHOWCASE = [
+      {
+        id: 'sub-126610ln',
+        brand: 'ROLEX',
+        category: 'ROLEX',
+        model: 'Submariner Date',
+        reference: 'Ref. 126610LN',
+        status: 'Showcase Reference · Inquire for Sourcing',
+        caseSpec: '41mm Oystersteel, Cerachrom Bezel',
+        movementSpec: 'Automatic Mechanical',
+        dialSpec: 'Black Dial, Sapphire Crystal',
+        description: 'An icon of underwater horology featuring a unidirectional rotatable bezel and Oyster bracelet. Contact Overtime NYC to inquire about current sourcing availability.',
+        image: 'https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=900&q=85'
+      },
+      {
+        id: 'ap-15510st',
+        brand: 'AUDEMARS PIGUET',
+        category: 'AUDEMARS PIGUET',
+        model: 'Royal Oak Selfwinding',
+        reference: 'Ref. 15510ST',
+        status: 'Showcase Reference · Inquire for Sourcing',
+        caseSpec: '41mm Stainless Steel, Octagonal Bezel',
+        movementSpec: 'Selfwinding Mechanical',
+        dialSpec: 'Grande Tapisserie Dial',
+        description: 'Celebrated for its hand-finished satin-brushed and polished bevels and integrated steel bracelet. Reach out to our showroom team for availability.',
+        image: 'https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=900&q=85'
+      },
+      {
+        id: 'pp-5711',
+        brand: 'PATEK PHILIPPE',
+        category: 'PATEK PHILIPPE',
+        model: 'Nautilus',
+        reference: 'Ref. 5711/1A',
+        status: 'Showcase Reference · Inquire for Sourcing',
+        caseSpec: '40mm Stainless Steel, Porthole Case',
+        movementSpec: 'Selfwinding Caliber',
+        dialSpec: 'Horizontal Embossed Dial',
+        description: 'Defined by its rounded octagonal bezel and refined slim profile. Connect with Overtime NYC to discuss collector sourcing and private acquisition.',
+        image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=900&q=85'
+      },
+      {
+        id: 'omega-moonwatch',
+        brand: 'OMEGA',
+        category: 'OMEGA & CARTIER',
+        model: 'Speedmaster Moonwatch',
+        reference: 'Ref. 310.30.42.50.01.001',
+        status: 'Showcase Reference · Inquire for Sourcing',
+        caseSpec: '42mm Stainless Steel, Tachymeter Bezel',
+        movementSpec: 'Manual-Winding Chronograph',
+        dialSpec: 'Step Black Chronograph Dial',
+        description: 'A benchmark manual-winding chronograph featuring an asymmetric case and classic dot-over-ninety bezel. Inquire for current showroom options.',
+        image: 'https://images.unsplash.com/photo-1622434641406-a158123450f9?auto=format&fit=crop&w=900&q=85'
+      },
+      {
+        id: 'cartier-santos',
+        brand: 'CARTIER',
+        category: 'OMEGA & CARTIER',
+        model: 'Santos de Cartier',
+        reference: 'Ref. WSSA0018',
+        status: 'Showcase Reference · Inquire for Sourcing',
+        caseSpec: '39.8mm Stainless Steel, Exposed Screws',
+        movementSpec: 'Automatic Mechanical',
+        dialSpec: 'Silvered Opaline, Roman Numerals',
+        description: 'Architectural square geometry paired with blued-steel sword hands and an ergonomic bracelet. Contact our team to inquire.',
+        image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=900&q=85'
+      },
+      {
+        id: 'rolex-daytona',
+        brand: 'ROLEX',
+        category: 'ROLEX',
+        model: 'Cosmograph Daytona',
+        reference: 'Ref. 116500LN',
+        status: 'Showcase Reference · Inquire for Sourcing',
+        caseSpec: '40mm Oystersteel, Black Cerachrom',
+        movementSpec: 'Automatic Chronograph',
+        dialSpec: 'White Lacquer Contrasting Counters',
+        description: 'Engineered for precision timing with an engraved tachymetric scale and Oysterlock clasp. Submit an inquiry to discuss sourcing.',
+        image: 'https://images.unsplash.com/photo-1548171915-e79a380a2a4b?auto=format&fit=crop&w=900&q=85'
+      }
+    ];
+
+    // 2. Smooth Scrollbar State & Helpers
+    let luxuryScrollbar = null;
+    let isScrollLocked = false;
+    let lockedScrollY = 0;
+
+    function initSmoothScrollbar() {
+      const wrapper = document.querySelector('#smooth-wrapper');
+      if (!wrapper || typeof Scrollbar === 'undefined') return null;
+
+      // Custom plugin to freeze scroll offset cleanly when modal or mobile drawer is open
+      class ModalLockPlugin extends Scrollbar.ScrollbarPlugin {
+        static pluginName = 'modalLock';
+        static defaultOptions = {
+          locked: false,
+        };
+        transformDelta(delta) {
+          return this.options.locked ? { x: 0, y: 0 } : delta;
+        }
+      }
+      Scrollbar.use(ModalLockPlugin);
+
+      const instance = Scrollbar.init(wrapper, {
+        damping: 0.08,
+        thumbMinSize: 20,
+        renderByPixels: true,
+        alwaysShowTracks: false,
+        continuousScrolling: true,
+        plugins: {
+          modalLock: {
+            locked: false,
+          },
+        },
+      });
+
+      const header = document.getElementById('site-header');
+      const headerInner = document.getElementById('header-inner');
+      const heroImg = document.getElementById('hero-parallax-img');
+      const backToTopBtn = document.getElementById('back-to-top-btn');
+
+      instance.addListener(({ offset }) => {
+        const y = offset.y;
+
+        // Compact header & elevated shadow on scroll
+        if (header && headerInner) {
+          if (y > 40) {
+            header.classList.add('shadow-sm', 'bg-pure/98');
+            headerInner.classList.remove('h-20', 'lg:h-24');
+            headerInner.classList.add('h-16', 'lg:h-20');
+          } else {
+            header.classList.remove('shadow-sm', 'bg-pure/98');
+            headerInner.classList.remove('h-16', 'lg:h-20');
+            headerInner.classList.add('h-20', 'lg:h-24');
+          }
+        }
+
+        // Subtle Hero Image Parallax
+        if (heroImg && y < window.innerHeight * 1.2) {
+          heroImg.style.transform = `translate3d(0, ${y * 0.24}px, 0) scale(1.1)`;
+        }
+
+        // Back-to-Top Floating Button Visibility
+        if (backToTopBtn) {
+          if (y > 520) {
+            backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+            backToTopBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+          } else {
+            backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+            backToTopBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+          }
+        }
+      });
+
+      return instance;
+    }
+
+    function setScrollLock(locked) {
+      isScrollLocked = locked;
+      const wrapper = document.querySelector('#smooth-wrapper');
+      if (wrapper) {
+        wrapper.classList.toggle('scroll-locked', locked);
+      }
+      if (luxuryScrollbar) {
+        lockedScrollY = luxuryScrollbar.offset.y;
+        luxuryScrollbar.updatePluginOptions('modalLock', { locked });
+      }
+    }
+
+    function smoothScrollToTarget(selector, extraOffset = 80, onComplete = null) {
+      const targetEl = document.querySelector(selector);
+      if (!targetEl) return;
+
+      if (luxuryScrollbar) {
+        if (selector === '#home') {
+          luxuryScrollbar.scrollTo(0, 0, 900);
+        } else {
+          luxuryScrollbar.scrollIntoView(targetEl, {
+            damping: 0.08,
+            offsetTop: extraOffset,
+            onlyScrollIfNeeded: false,
+          });
+        }
+        if (typeof onComplete === 'function') {
+          setTimeout(onComplete, 750);
+        }
+      } else {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (typeof onComplete === 'function') {
+          setTimeout(onComplete, 650);
+        }
+      }
+    }
+
+    // Bind all internal anchor links to smooth-scrollbar
+    function bindSmoothAnchors() {
+      document.querySelectorAll('.smooth-anchor').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+          const targetSelector = anchor.getAttribute('data-scroll-target') || anchor.getAttribute('href');
+          if (targetSelector && targetSelector.startsWith('#')) {
+            e.preventDefault();
+            if (mobileMenuOpen) {
+              toggleMobileMenu(false);
+            }
+            smoothScrollToTarget(targetSelector, 84);
+          }
+        });
+      });
+
+      const backToTopBtn = document.getElementById('back-to-top-btn');
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+          smoothScrollToTarget('#home', 0);
+        });
+      }
+    }
+
+    // 3. Render Watch Cards
+    const watchGrid = document.getElementById('watch-grid');
+
+    function renderWatches(filter = 'ALL') {
+      const items = filter === 'ALL'
+        ? WATCH_SHOWCASE
+        : WATCH_SHOWCASE.filter(w => w.category === filter);
+
+      watchGrid.innerHTML = items.map(watch => `
+        <article class="watch-card bg-pure border border-platinum hover:border-gold transition-colors duration-300 flex flex-col justify-between">
+          <div>
+            <!-- Image Container -->
+            <div class="relative aspect-[4/3] overflow-hidden bg-ivory border-b border-platinum">
+              <img
+                src="${watch.image}"
+                alt="${watch.brand} ${watch.model} ${watch.reference}"
+                loading="lazy"
+                class="watch-card-img w-full h-full object-cover"
+              />
+              <span class="absolute top-3.5 left-3.5 bg-pure/95 backdrop-blur-sm border border-platinum px-3 py-1 text-[9px] uppercase tracking-editorial text-charcoal">
+                Showcase Model
+              </span>
+            </div>
+
+            <!-- Card Metadata -->
+            <div class="p-7 sm:p-8">
+              <p class="text-[10px] uppercase tracking-widest-luxury text-gold font-medium">
+                ${watch.brand}
+              </p>
+              <h3 class="font-serif text-2xl text-charcoal tracking-wide mt-1.5">
+                ${watch.model}
+              </h3>
+              <p class="text-xs text-muted uppercase tracking-wider mt-1">
+                ${watch.reference}
+              </p>
+
+              <div class="mt-5 pt-4 border-t border-platinum flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+                <span class="text-[11px] text-muted">${watch.status}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card CTAs -->
+          <div class="px-7 sm:px-8 pb-7 sm:pb-8 grid grid-cols-2 gap-3">
+            <button
+              type="button"
+              onclick="openWatchModal('${watch.id}')"
+              class="py-3.5 px-3 border border-charcoal hover:bg-charcoal text-charcoal hover:text-white text-[10px] uppercase tracking-editorial font-medium transition-colors duration-300"
+            >
+              View Details
+            </button>
+            <button
+              type="button"
+              onclick="requestWatchPrice('${watch.id}')"
+              class="py-3.5 px-3 bg-gold hover:bg-charcoal text-white text-[10px] uppercase tracking-editorial font-medium transition-colors duration-300"
+            >
+              Request Price
+            </button>
+          </div>
+        </article>
+      `).join('');
+
+      if (luxuryScrollbar) {
+        luxuryScrollbar.update();
+      }
+    }
+
+    // Filter Buttons Logic
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('active', 'bg-charcoal', 'text-white', 'border-charcoal');
+          b.classList.add('border-platinum', 'text-charcoal');
+        });
+        btn.classList.add('active', 'bg-charcoal', 'text-white', 'border-charcoal');
+        btn.classList.remove('border-platinum');
+        renderWatches(btn.dataset.filter);
+      });
+    });
+
+    // 4. Watch Modal Logic
+    const watchModal = document.getElementById('watch-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    let activeModalWatch = null;
+
+    function openWatchModal(watchId) {
+      const watch = WATCH_SHOWCASE.find(w => w.id === watchId);
+      if (!watch) return;
+      activeModalWatch = watch;
+
+      document.getElementById('modal-watch-img').src = watch.image;
+      document.getElementById('modal-watch-img').alt = `${watch.brand} ${watch.model}`;
+      document.getElementById('modal-watch-brand').textContent = watch.brand;
+      document.getElementById('modal-watch-title').textContent = watch.model;
+      document.getElementById('modal-watch-ref').textContent = watch.reference;
+      document.getElementById('modal-watch-case').textContent = watch.caseSpec;
+      document.getElementById('modal-watch-movement').textContent = watch.movementSpec;
+      document.getElementById('modal-watch-dial').textContent = watch.dialSpec;
+      document.getElementById('modal-watch-desc').textContent = watch.description;
+
+      watchModal.classList.remove('hidden');
+      watchModal.classList.add('flex');
+      setScrollLock(true);
+    }
+
+    function closeWatchModal() {
+      watchModal.classList.add('hidden');
+      watchModal.classList.remove('flex');
+      setScrollLock(false);
+    }
+
+    closeModalBtn.addEventListener('click', closeWatchModal);
+    watchModal.addEventListener('click', (e) => {
+      if (e.target === watchModal) closeWatchModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (!watchModal.classList.contains('hidden')) {
+          closeWatchModal();
+        } else if (mobileMenuOpen) {
+          toggleMobileMenu(false);
+        }
+      }
+    });
+
+    document.getElementById('modal-request-price-btn').addEventListener('click', () => {
+      if (activeModalWatch) {
+        const id = activeModalWatch.id;
+        closeWatchModal();
+        requestWatchPrice(id);
+      }
+    });
+
+    // 5. Seamless Inquiry Pre-fill & Smooth-Scrollbar Routing
+    function routeToInquiry(type, brandValue = '', presetMessage = '') {
+      const inquirySelect = document.getElementById('inquiryType');
+      const brandInput = document.getElementById('watchBrand');
+      const messageInput = document.getElementById('message');
+
+      if (inquirySelect) inquirySelect.value = type;
+      if (brandInput) brandInput.value = brandValue;
+      if (messageInput && presetMessage) messageInput.value = presetMessage;
+
+      smoothScrollToTarget('#contact', 80, () => {
+        const nameField = document.getElementById('fullName');
+        if (nameField) nameField.focus({ preventScroll: true });
+      });
+    }
+
+    function requestWatchPrice(watchId) {
+      const watch = WATCH_SHOWCASE.find(w => w.id === watchId);
+      if (!watch) return;
+      routeToInquiry(
+        'Buying a Watch',
+        `${watch.brand} ${watch.model} (${watch.reference})`,
+        `Hello Overtime NYC, I would like to request pricing and current sourcing availability for the ${watch.brand} ${watch.model} (${watch.reference}).`
+      );
+    }
+
+    // 6. Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileDrawer = document.getElementById('mobile-menu-drawer');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+    let mobileMenuOpen = false;
+
+    function toggleMobileMenu(forceState) {
+      mobileMenuOpen = typeof forceState === 'boolean' ? forceState : !mobileMenuOpen;
+      mobileMenuBtn.setAttribute('aria-expanded', String(mobileMenuOpen));
+      mobileDrawer.setAttribute('aria-hidden', String(!mobileMenuOpen));
+
+      if (mobileMenuOpen) {
+        mobileDrawer.style.maxHeight = '520px';
+        mobileDrawer.style.opacity = '1';
+        iconOpen.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+        setScrollLock(true);
+      } else {
+        mobileDrawer.style.maxHeight = '0px';
+        mobileDrawer.style.opacity = '0';
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        setScrollLock(false);
+      }
+    }
+
+    mobileMenuBtn.addEventListener('click', () => toggleMobileMenu());
+
+    // 7. Inquiry Form Validation & Interactive Feedback
+    const inquiryForm = document.getElementById('luxury-inquiry-form');
+    const feedbackBox = document.getElementById('form-feedback');
+
+    function showFieldError(fieldId, message) {
+      const input = document.getElementById(fieldId);
+      const err = document.getElementById(`error-${fieldId}`);
+      if (input) input.classList.add('border-red-700');
+      if (err) {
+        err.textContent = message;
+        err.classList.remove('hidden');
+      }
+    }
+
+    function clearFieldErrors() {
+      ['fullName', 'emailAddress', 'message'].forEach(id => {
+        const input = document.getElementById(id);
+        const err = document.getElementById(`error-${id}`);
+        if (input) input.classList.remove('border-red-700');
+        if (err) {
+          err.textContent = '';
+          err.classList.add('hidden');
+        }
+      });
+      feedbackBox.classList.add('hidden');
+    }
+
+    inquiryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      clearFieldErrors();
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('emailAddress').value.trim();
+      const inquiryType = document.getElementById('inquiryType').value;
+      const watchBrand = document.getElementById('watchBrand').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      let isValid = true;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (fullName.length < 2) {
+        showFieldError('fullName', 'Please enter your full name.');
+        isValid = false;
+      }
+      if (!emailRegex.test(email)) {
+        showFieldError('emailAddress', 'Please enter a valid email address.');
+        isValid = false;
+      }
+      if (message.length < 10) {
+        showFieldError('message', 'Please provide a brief message (at least 10 characters).');
+        isValid = false;
+      }
+
+      if (!isValid) {
+        feedbackBox.className = 'mb-8 p-5 border border-red-300 bg-red-50/70 text-red-900 text-xs leading-relaxed';
+        feedbackBox.innerHTML = '<strong>Please review the highlighted fields</strong> before submitting your inquiry.';
+        feedbackBox.classList.remove('hidden');
+        if (luxuryScrollbar) luxuryScrollbar.update();
+        return;
+      }
+
+      // Success Confirmation
+      feedbackBox.className = 'mb-8 p-6 border border-gold bg-ivory text-charcoal text-sm leading-relaxed';
+      feedbackBox.innerHTML = `
+        <p class="font-serif text-xl text-charcoal mb-1">Thank You, ${fullName.replace(/</g, '&lt;')}.</p>
+        <p class="text-xs text-muted leading-relaxed">
+          Your inquiry regarding <span class="text-charcoal font-medium">${inquiryType}</span>${watchBrand ? ` (${watchBrand.replace(/</g, '&lt;')})` : ''} has been recorded. For immediate scheduling at 64 West 47th Street, Booth F11, you may also book directly via our <a href="https://calendly.com/ontimelux18/visit" target="_blank" rel="noopener noreferrer" class="underline text-gold hover:text-charcoal">Showroom Appointment Calendar</a>.
+        </p>
+      `;
+      feedbackBox.classList.remove('hidden');
+      inquiryForm.reset();
+      if (luxuryScrollbar) luxuryScrollbar.update();
+    });
+
+    // 8. Three.js Ambient Luxury Horological Tourbillon / Escapement Accent in Hero
+    function initHeroThreeScene() {
+      const canvas = document.getElementById('hero-three-canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+      camera.position.z = 11;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+
+      // Champagne Gold Wireframe Horological Rings
+      const goldMaterial = new THREE.MeshBasicMaterial({
+        color: 0xB69A67,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.16
+      });
+
+      const subtleLineMat = new THREE.LineBasicMaterial({
+        color: 0xB69A67,
+        transparent: true,
+        opacity: 0.22
+      });
+
+      const horologyGroup = new THREE.Group();
+      horologyGroup.position.set(3.2, 0.2, 0);
+
+      // Outer Bezel Ring
+      const outerTorus = new THREE.Mesh(new THREE.TorusGeometry(3.4, 0.04, 12, 72), goldMaterial);
+      // Inner Escapement Ring
+      const innerTorus = new THREE.Mesh(new THREE.TorusGeometry(2.35, 0.03, 10, 64), goldMaterial);
+      innerTorus.rotation.x = Math.PI / 5;
+
+      // 12 Hour Index Tick Marks
+      for (let i = 0; i < 12; i++) {
+        const angle = (i / 12) * Math.PI * 2;
+        const pts = [
+          new THREE.Vector3(Math.cos(angle) * 2.95, Math.sin(angle) * 2.95, 0),
+          new THREE.Vector3(Math.cos(angle) * 3.3, Math.sin(angle) * 3.3, 0)
+        ];
+        const geo = new THREE.BufferGeometry().setFromPoints(pts);
+        horologyGroup.add(new THREE.Line(geo, subtleLineMat));
+      }
+
+      horologyGroup.add(outerTorus);
+      horologyGroup.add(innerTorus);
+      scene.add(horologyGroup);
+
+      let mouseX = 0;
+      let mouseY = 0;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 0.5;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5;
+      }, { passive: true });
+
+      window.addEventListener('resize', () => {
+        if (!canvas.parentElement) return;
+        const w = canvas.parentElement.clientWidth;
+        const h = canvas.parentElement.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+        horologyGroup.position.x = w < 768 ? 0 : 3.2;
+        if (luxuryScrollbar) luxuryScrollbar.update();
+      });
+
+      if (window.innerWidth < 768) {
+        horologyGroup.position.x = 0;
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        outerTorus.rotation.z += 0.0012;
+        innerTorus.rotation.z -= 0.002;
+        innerTorus.rotation.y += 0.0015;
+
+        horologyGroup.rotation.y += (mouseX - horologyGroup.rotation.y) * 0.04;
+        horologyGroup.rotation.x += (-mouseY - horologyGroup.rotation.x) * 0.04;
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    }
+
+    // 9. Scroll Reveal Observer (Scoped to #smooth-wrapper) & Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('copyright-year').textContent = new Date().getFullYear();
+      renderWatches('ALL');
+
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+
+      luxuryScrollbar = initSmoothScrollbar();
+      bindSmoothAnchors();
+
+      const smoothWrapper = document.querySelector('#smooth-wrapper');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: smoothWrapper || null,
+        threshold: 0.1
+      });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+
+    window.addEventListener('load', () => {
+      initHeroThreeScene();
+      if (luxuryScrollbar) {
+        luxuryScrollbar.update();
+      }
+    });
+  </script>
+</body>
+</html>
